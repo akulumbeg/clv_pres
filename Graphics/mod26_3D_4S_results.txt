@@ -1,0 +1,64 @@
+Summary of 5000 MCMC draws after burn-in of 5000.
+
+Statistics of posterior draws of parameters (thinning = 1):
+
+ param                                       mean   sd      median HPD 2.5% HPD 97.5% ESS 
+ abs(theta_sr_Intercept)                     0.503  0.085   0.494  0.359    0.678     98  
+ abs(theta_sr_usr_cust_promo_months)         0.543  0.465   0.507  0        1.371     18  
+ abs(theta_sr_usr_cust_spend_lifetime_total) 0      0       0      0        0         268 
+ abs(theta_sr_usr_cust_courseapp)            0.589  0.19    0.583  0.195    0.941     12  
+ abs(theta_sr_usr_cust_coursedirect)         0.775  0.223   0.737  0.396    1.205     9   
+ abs(theta_sr_usr_cust_courseemail)          1.899  0.494   1.867  0.896    2.801     10  
+ abs(theta_sr_usr_cust_coursesearch_engine)  0.035  0.047   0.015  0        0.141     34  
+ abs(theta_sr_usr_cust_coursesocial)         0.562  0.118   0.553  0.343    0.781     26  
+ abs(theta_sr_usr_num_transactions_box)      0.109  0.017   0.107  0.077    0.143     221 
+ abs(theta_sr_fdb_box_word_count)            0.001  0       0.001  0        0.001     64  
+ abs(theta_sr_fdb_box_avg_senti)             0.272  0.125   0.261  0.056    0.492     10  
+ abs(theta_sr_fdb_box_eloquency)             0.254  0.101   0.244  0.073    0.446     36  
+                                                                                          
+ beta_mean_Intercept                         -0.052 0.238   0      -0.609   0.318     614 
+ beta_mean_usr_cust_promo_months             -0.001 0.204   0      -0.333   0.319     2808
+ beta_mean_usr_cust_spend_lifetime_total     0      0       0      -0.001   0         30  
+ beta_mean_usr_cust_courseapp                -0.005 0.23    0      -0.533   0.424     3865
+ beta_mean_usr_cust_coursedirect             0.017  0.295   0      -0.565   0.644     1929
+ beta_mean_usr_cust_courseemail              0      0.377   0      -0.56    0.691     3242
+ beta_mean_usr_cust_coursesearch_engine      -0.086 0.125   -0.003 -0.35    0.027     21  
+ beta_mean_usr_cust_coursesocial             0.004  0.197   0      -0.329   0.488     3121
+ beta_mean_usr_num_transactions_box          -0.869 0.163   -0.874 -1.178   -0.545    1397
+ beta_mean_fdb_box_word_count                0      0.001   0      -0.001   0.002     436 
+ beta_mean_fdb_box_avg_senti                 -0.075 0.215   0      -0.636   0.168     159 
+ beta_mean_fdb_box_eloquency                 0      0.114   0      -0.242   0.221     694 
+                                                                                          
+ xi2_Intercept                               4.571  149.385 0.472  0.01     8.344     5000
+ xi2_usr_cust_promo_months                   3.221  23.679  0.384  0        10.752    2870
+ xi2_usr_cust_spend_lifetime_total           0.004  0.161   0      0        0         5000
+ xi2_usr_cust_courseapp                      3.219  31.452  0.567  0.003    10.267    5000
+ xi2_usr_cust_coursedirect                   3.868  22.507  0.891  0.021    13.361    3293
+ xi2_usr_cust_courseemail                    9.418  95.694  3.093  0.065    28.232    5000
+ xi2_usr_cust_coursesearch_engine            0.227  2.602   0.001  0        0.455     4478
+ xi2_usr_cust_coursesocial                   2.66   9.713   0.559  0.007    9.42      3239
+ xi2_usr_num_transactions_box                0.827  6.926   0.036  0.001    2.19      4612
+ xi2_fdb_box_word_count                      0.016  0.349   0      0        0.001     5000
+ xi2_fdb_box_avg_senti                       2.653  88.746  0.167  0        5.16      5000
+ xi2_fdb_box_eloquency                       1.612  14.168  0.146  0        5.11      5000
+                                                                                          
+ tau2_Intercept                              0.633  18.63   0      0        0.776     4384
+ tau2_usr_cust_promo_months                  0.147  1.426   0      0        0.3       2326
+ tau2_usr_cust_spend_lifetime_total          0.001  0.021   0      0        0         5000
+ tau2_usr_cust_courseapp                     0.429  5.047   0      0        0.833     4568
+ tau2_usr_cust_coursedirect                  0.632  7.901   0      0        1.129     2906
+ tau2_usr_cust_courseemail                   0.737  11.591  0      0        1.02      2875
+ tau2_usr_cust_coursesearch_engine           0.354  3.799   0.001  0        0.782     4617
+ tau2_usr_cust_coursesocial                  0.28   5.808   0      0        0.483     4791
+ tau2_usr_num_transactions_box               3.162  22.893  0.664  0.018    9.769     2561
+ tau2_fdb_box_word_count                     0      0.011   0      0        0         5000
+ tau2_fdb_box_avg_senti                      0.464  8.954   0      0        0.837     4401
+ tau2_fdb_box_eloquency                      0.157  4.91    0      0        0.21      5000
+                                                                                          
+ kappa2_B                                    2.326  3.253   1.219  0.001    8.232     1412
+                                                                                          
+ lambda2_B                                   26.501 58.955  7.562  0        113.131   2582
+                                                                                          
+ a_xi                                        0.129  0.036   0.125  0.068    0.2       924 
+                                                                                          
+ a_tau                                       0.064  0.026   0.059  0.02     0.119     41

@@ -1,18 +1,18 @@
 ---
-title: 'A Presentation'
-subtitle: '[Data-based Storytelling](https://danielw2904.github.io/data-based-storytelling/)'
+title: 'Modeling Customer Lifetime With Dynamic Customer Feedback Information'
+subtitle: 'New Perspectives in Business and Econometrics'
 title-slide-attributes: 
   data-background-image: Graphics/D2.jpg
 author: 
 - Alexander Kulumbeg
 - Daniel Winkler
-institute: 'Institute for Retailing & Data Science'
+institute: 'Marketing Institutes MCA & RDS'
 bibliography: bibliography.bib  
 format: 
     revealjs:
         theme: [simple, rds_theme.scss]
         logo: Graphics/WU_logo.png
-        footer: "[Data-based Storytelling](https://danielw2904.github.io/data-based-storytelling/)"
+        footer: "New Perspectives in Business and Econometrics - 24 January 2023"
         height: 1080
         width: 1920
         center-title-slide: false
@@ -33,15 +33,65 @@ format:
 
 ## Story
 
+
+- Nation-wide apparel subscription box service provider
+- Female customers only
+- Contractual setting - curated shopping
+
+### Operation
+
+- Monthly surprise boxes with clothes selected by a stylist (person)
+- Option for customer to approve or change something in the box
+- Once received - rating of each item by categories and with optional written feedback
+
+
+## Story II
+
+![](./Graphics/story.png)
+
 ## Data
 
+:::: {.columns}
+
+::: {.column width="30%"}
+- Information on
+    - Orders
+    - Feedback
+    - App usage
+    - Customer journey
+    - Style preferences
+    - Stylist performance
+    - Previews of Boxes
+:::
+
+::: {.column width="70%"}
+- Distilled into Users Dataframe
+    - One 
+- a
+- c
+:::
+
+::::
+
+
+
+
 ## Idea
+
+
 
 # Model
 
 ## Model Details
 
-## Results
+## Results I
+
+## Results II
+
+## Results III
+
+## Results IV
+
 
 ## Conclusion
 

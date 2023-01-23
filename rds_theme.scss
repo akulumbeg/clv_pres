@@ -18,6 +18,12 @@ $headingMargin: 0 0 33px 0;
     min-height: 100vh;
 }
 
+h1.title {
+  color: white;
+  -webkit-text-stroke: 3px black;
+  
+}
+
 // .reveal h2 {
 //     display: flex;
 //     align-items: flex-start;
