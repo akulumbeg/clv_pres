@@ -103,11 +103,6 @@ format:
 
 ::::
 
-
-
-
-## Idea
-
 # Model
 
 ## Causal Model
@@ -378,3 +373,5 @@ $$
 ## Conclusion
 
 ## Discussion
+
+## References
