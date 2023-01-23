@@ -22,7 +22,7 @@ format:
         code-link: true
         code-overflow: wrap
         incremental: false
-        echo: true
+        echo: false
         code-fold: true
         fig-align: center
         fig-width: 18
@@ -81,18 +81,245 @@ format:
 
 ## Idea
 
-
-
 # Model
 
+## Causal Model
+
+```{r}
+library(ggdag)
+library(dagitty)
+library(tidyverse)
+dagify(
+  y ~ x + z + a, 
+  z ~ x + a + b,
+  x ~ b,
+ coords = list(
+    x = c(x = 1, y = 1.5, z = 1, a = 1.5, b = 0.5), 
+    y = c(x = 1, y = 1, z = 0, a = 0, b = 0.5)),
+  labels = c(
+    "y" = "Churn(t)",
+    "x" = "Cost(t)",
+    "z" = "Satisfaction(t)",
+    "a" = "Saturation(t)",
+    "b" = "Quality(t)"
+  ),
+  exposure = "x", 
+  outcome = "y"
+) |>
+  tidy_dagitty() |>
+  dplyr::mutate(fill = ifelse(name == "y", 
+  "outcome", 
+  ifelse(name == "z", 
+    "variables of interest", "none"))) |>
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  geom_dag_point(size=12, aes(color = fill)) + #+ 
+  geom_dag_edges() +
+  geom_dag_label_repel(aes(label = label), size = 10)+
+  theme_dag() +
+  theme(legend.position = "none") +
+  annotate("text", 
+    x = 0.9,
+    y = -0.1, 
+    vjust = 1,
+    hjust = 0,
+    label = "Measured via textual customer feedback",
+    size = 7)
+```
+
 ## Model Details
+
+
+## A Bayesian Model for Time-Varying Parameters
+
+<br>
+
+A piecewise exponential model for lifetimes. 
+
+- Given set $\mathcal{S}=\left\{s_{0}=0, s_{1}, \ldots, s_{J}\right\}, s_{0}<s_{1}<\cdots<s_{J}$ partitions the time axis into $J$ intervals $\left(s_{0}, s_{1}\right], \ldots,\left(s_{J-1}, s_{J}\right]$
+
+<br>
+
+- Hazard within interval is constant
+
+$$
+\lambda(t|\boldsymbol z_i; t \in (s_{j-1}, s_j]) = \lambda_{ij} = \exp\left(\beta_{0j} + \sum_{k=1}^{K} z_{i k} \beta_{kj}\right)
+$$
+
+::: {.footer}
+Based on @gamerman1991dynamic, @wagner2011bayesian.
+:::
+
+## Piecewise Exponential Model
+
+```{r, fig.align="center"}
+S <- c(0, 15, 35, 45, 70, 100)
+par(mar = c(2.5, 2.5, 1, 1)  ,mgp = c(1, .5, 0))
+lambda <- c(2.8, 2.8, 3.1, 2.2, 1.8, 1.6, 1.6)
+
+haz_fun <- stepfun(S, lambda, f = 0)
+
+plot(haz_fun, verticals = FALSE, do.points = FALSE,
+     ylim = c(0, 4), xlim = c(0, 100),
+     xaxs = "i", yaxs = "i", bty = "n",
+     main = "", ylab = bquote(lambda[t]), xlab = "t",
+     xaxt = "n", col.axis = "white")
+
+axis(side = 1, at = S,
+     labels = expression(s[0], s[1], s[2], s[3], s[4], s[5]))
+
+arrow_height <- .2
+arrow_offset <- .3
+arrow_length <- .09
+text_offset <- .07
+death <- 61
+
+for (t in S[2:(length(S) - 1)]) {
+  abline(v = t, col  = "grey", lty = 2)
+}
+
+
+arrows(arrow_offset, arrow_height,
+       S[2] - arrow_offset, arrow_height,
+       code = "3", length = arrow_length)
+arrows(S[2] + arrow_offset, arrow_height,
+       S[3] - arrow_offset, arrow_height,
+       code = "3", length = arrow_length)
+arrows(S[3] + arrow_offset, arrow_height,
+       S[4] - arrow_offset, arrow_height,
+       code = "3", length = arrow_length)
+arrows(S[4] + arrow_offset, arrow_height,
+       death - arrow_offset, arrow_height,
+       code = "3", length = arrow_length)
+
+
+text(S[2]/2, arrow_height + text_offset, bquote(u[i1]))
+text((S[2] + S[3])/2, arrow_height + text_offset, bquote(u[i2]))
+text((S[3] + S[4])/2, arrow_height + text_offset, bquote(u[i3]))
+text((S[4] + death)/2, arrow_height + text_offset, bquote(u[i4] == u[il]))
+
+abline(v = death, lty = 2)
+
+arrows(S[1] + arrow_offset, arrow_height* 2,
+       61 - arrow_offset, arrow_height* 2,
+       code = "3", length = arrow_length)
+text(61/2, arrow_height*2 + text_offset, bquote(y[i]))
+```
+
+## Evolution of the $\beta_{kj}$'s
+
+As in @hemming2002parametric, Gaussian random walks with initial state $\beta_{k 0} \sim \mathcal{N}\left({\beta_{k}}, {\theta_{k}}\right)$ are considered:
+$$
+\beta_{k j}=\beta_{k, j-1}+w_{j}, \quad w_{j} \sim \mathcal{N}\left(0, {\theta_{k}}\right).
+$$
+
+```{r}
+#| eval: false
+library(shrinkDSM);library(shrinkTVP)
+sim <- simTVP(theta = c(0.25, 0, 0), beta_mean = c(1.5, -0.3, 0), N = 5)
+
+S <- c(0, 15, 35, 45, 70, 100)
+
+lambda1 <- sim$true_vals$beta[1,]
+lambda1 <- c(lambda1[1], lambda1, lambda1[5])
+haz_fun1 <- stepfun(S, lambda1)
+
+lambda2 <- sim$true_vals$beta[2,]
+lambda2 <- c(lambda2[1], lambda2, lambda2[5])
+haz_fun2 <- stepfun(S, lambda2)
+
+lambda3 <- sim$true_vals$beta[3,]
+lambda3 <- c(lambda3[1], lambda3, lambda3[5])
+haz_fun3 <- stepfun(S, lambda3)
+
+
+par(mar = c(2, 2.5, .5, 1), mgp = c(1.2, .5, 0))
+layout(matrix(c(1, 1, 2, 3), byrow = TRUE, ncol = 2))
+
+plot(haz_fun1, verticals = FALSE, do.points = FALSE,
+     ylim = c(0, 4), xlim = c(0, 100),
+     xaxs = "i", bty = "n",
+     main = "", ylab = bquote(beta[kj]), xlab = "t",
+     xaxt = "n", col = "orange")
+axis(side = 1, at = S,
+     labels = expression(s[0], s[1], s[2], s[3], s[4], s[5]))
+for (t in S[2:(length(S) - 1)]) {
+  abline(v = t, col  = "grey", lty = 2)
+}
+text(par("usr")[2],par("usr")[4],bquote(theta[k] != 0 ~ ", " ~ beta[k] != 0), adj=c(1.2, 2))
+
+plot(haz_fun2, verticals = FALSE, do.points = FALSE,
+     ylim = c(-1, 1), xlim = c(0, 100),
+     xaxs = "i", yaxs = "i", bty = "n",
+     main = "", ylab = bquote(beta[kj]), xlab = "t",
+     xaxt = "n", col = "orange")
+axis(side = 1, at = S,
+     labels = expression(s[0], s[1], s[2], s[3], s[4], s[5]))
+for (t in S[2:(length(S) - 1)]) {
+  abline(v = t, col  = "grey", lty = 2)
+}
+text(par("usr")[2],par("usr")[4],bquote(theta[k] == 0 ~ ", " ~ beta[k] != 0), adj=c(1.2, 2))
+
+plot(haz_fun3, verticals = FALSE, do.points = FALSE,
+     ylim = c(-1, 1), xlim = c(0, 100),
+     xaxs = "i", yaxs = "i", bty = "n",
+     main = "", ylab = bquote(beta[kj]), xlab = "t",
+     xaxt = "n", col = "orange")
+axis(side = 1, at = S,
+     labels = expression(s[0], s[1], s[2], s[3], s[4], s[5]))
+for (t in S[2:(length(S) - 1)]) {
+  abline(v = t, col  = "grey", lty = 2)
+}
+text(par("usr")[2],par("usr")[4],bquote(theta[k] == 0 ~ ", " ~ beta[k] == 0), adj=c(1.2, 2))
+```
+
+
+::: {#fig-div}
+
+![''](test.svg){.r-stretch}
+
+::: 
+
+## Priors on Innovation Variances and Initial Value Means
+
+Triple gamma priors [@cadonna2020triple]^[Known as normal-gamma-gamma prior [@griffin2017hierarchical] for variable selection] are placed on both $\beta_k$ and $\theta_k$. Name stems from the fact that, when used for variances, it has a representation as a compound distribution consisting of three gamma distributions:
+
+$$
+\begin{aligned}
+\theta_{k}\mid{\xi}_{k}^{2} \sim \mathcal{G}\left(\frac{1}{2}, \frac{1}{2 \xi_{k}^{2}}\right), \quad& \xi_{k}^{2}\mid a^{\xi}, \kappa_{k}^{2} \sim \mathcal{G}\left(a^{\xi}, \frac{a^{\xi} \kappa_{k}^{2}}{2}\right), \\ 
+\kappa_{k}^{2} \mid c^{\xi}, \kappa_{B}^{2} &\sim \mathcal{G}\left(c^{\xi}, \frac{c^{\xi}}{\kappa_{B}^{2}}\right).
+\end{aligned}
+$$
+
+The first stage conditional prior implies the following first stage conditional prior on $\sqrt \theta_k$:
+$$
+\sqrt \theta_k  | \xi_k^2\sim \mathcal{N}\left(0, \xi_k^2\right)
+$$
+
+
+
+## Adding a Factor (?)
+
+\small
+To account for unobserved heterogeneity in the data, a grouped factor component can be added to the hazard rates. Let observation $i$ belong to group $g$, with $g \in\{1, \ldots, G\} .$ Then the hazard rates look as follows:
+$$
+\lambda_{i j}=\exp \left(\phi_{g} f_{j}+\beta_{0 j}+\sum_{k=1}^{K} z_{i k} \beta_{k j}\right),
+$$
+where $f_{j}$ is allowed to vary over time according to a zero-mean stochastic volatility law of motion^[\tiny Note that this is essentially a single factor version of the model used in @hosszejni2021modeling.]:
+$$
+\begin{aligned}
+f_{j} & \sim \mathcal{N}\left(0, e^{h_{j}}\right), \\
+h_{j} \mid h_{j-1}, \phi_{f}, \sigma_{f}^{2} & \sim \mathcal{N}\left(\phi_{f} h_{j-1}, \sigma_{f}^{2}\right),\\
+h_{0} & \sim \mathcal{N}\left(0, \sigma_{f}^{2} /\left(1-\phi_{f}^{2}\right)\right) .
+\end{aligned}
+$$
+
 
 ## Results I
 
 
 ::: {#fig-div}
 
-![Plot1](./Graphics/mod26_3D_4S_plot1-1.png)
+![''](./Graphics/mod26_3D_4S_plot1-1.png)
 
 :::
 
@@ -101,7 +328,7 @@ format:
 
 ::: {#fig-div}
 
-![Plot2](./Graphics/mod26_3D_4S_plot2-1.png)
+![''](./Graphics/mod26_3D_4S_plot2-1.png)
 
 :::
 
@@ -109,7 +336,7 @@ format:
 
 ::: {#fig-div}
 
-![Plot3](./Graphics/mod26_3D_4S_plot3-1.png)
+![''](./Graphics/mod26_3D_4S_plot3-1.png)
 
 :::
 
@@ -117,7 +344,7 @@ format:
 
 ::: {#fig-div}
 
-![Plot4](./Graphics/mod26_3D_4S_plot4-1.png)
+![''](./Graphics/mod26_3D_4S_plot4-1.png)
 
 :::
 
