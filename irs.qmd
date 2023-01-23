@@ -135,8 +135,8 @@ dagify(
     "variables of interest", "none"))) |>
   ggplot(aes(x = x, y = y, xend = xend, yend = yend)) + 
   geom_dag_point(size=12, aes(color = fill)) + #+ 
-  geom_dag_edges() +
-  geom_dag_label_repel(aes(label = label), size = 10)+
+  geom_dag_label_repel(aes(label = label), size = 8)+
+  geom_dag_edges(edge_color = 'gray', edge_width=1.5, edge_alpha = 0.6) +
   theme_dag() +
   theme(legend.position = "none") +
   annotate("text", 
