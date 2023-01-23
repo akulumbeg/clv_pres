@@ -54,6 +54,7 @@ format:
 :::: {.columns}
 
 ::: {.column width="30%"}
+
 - Information on
     - Orders
     - Feedback
@@ -65,10 +66,12 @@ format:
 :::
 
 ::: {.column width="70%"}
+
 - Distilled into Users Dataframe
     - One 
 - a
 - c
+
 :::
 
 ::::
@@ -86,6 +89,15 @@ format:
 
 ## Results I
 
+<<<<<<< HEAD
+=======
+::: {#fig-div}
+
+![](./Graphics/mod26_3D_4S_plot1.pdf)
+
+:::
+
+>>>>>>> 6842aeae2854c9fd46bb45526aa454598192a5e4
 ## Results II
 
 ## Results III
