@@ -33,12 +33,11 @@ format:
 
 ## Story
 
-
+- Contractual setting - curated shopping
 - Nation-wide apparel subscription box service provider
 - Female customers only
-- Contractual setting - curated shopping
 
-### Operation
+<br>
 
 - Monthly surprise boxes with clothes selected by a stylist (person)
 - Option for customer to approve or change something in the box
@@ -49,12 +48,32 @@ format:
 
 ![](./Graphics/story.png)
 
+
+## Idea
+
+- Propensity to churn changes over time
+- Traditionally data is 
+    - hard to obtain
+    - static / collected once
+- Written feedback contains (un)conscious pieces of information
+- Feedback changes over time
+    - Stylist did a better/worse job than before
+    - Clothes' color/fit/cut/size/material is good/bad
+    - Items did/didn't adhere to the customer preferences stated in the quiz
+    - ...
+    
+## Problem
+
+- What is hiding in the dynamic feedback (e.g., emotionality, eloquence, engagement...)?
+- How do these components influence the risk of customer attrition?
+- Can we identify other (latent) time-varying signals that affect customer lifetime?
+
+
 ## Data
 
 :::: {.columns}
 
-::: {.column width="30%"}
-
+::: {.column width="50%"}
 - Information on
     - Orders
     - Feedback
@@ -63,14 +82,22 @@ format:
     - Style preferences
     - Stylist performance
     - Previews of Boxes
+- ca. 57,000 unique customers
+- ca. 260,000 transactions
+- ca. 1,050,000 feedback items
 :::
 
-::: {.column width="70%"}
+::: {.column width="50%"}
 
-- Distilled into Users Dataframe
-    - One 
-- a
-- c
+- **Distilled into a box-level dataframe**
+    - User demographics
+    - User contract length
+    - User lifetime spending
+    - **Box-level feedback variables**
+        - Word count
+        - Sentiment
+        - Eloquence
+        - ...
 
 :::
 
