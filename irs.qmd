@@ -1,0 +1,32 @@
+---
+title: 'A Presentation'
+subtitle: '[Data-based Storytelling](https://danielw2904.github.io/data-based-storytelling/)'
+title-slide-attributes: 
+  data-background-image: Graphics/D2.jpg
+author: 
+- Alexander Kulumbeg
+- Daniel Winkler
+institute: 'Institute for Retailing & Data Science'
+bibliography: bibliography.bib  
+format: 
+    revealjs:
+        theme: [simple, rds_theme.scss]
+        logo: Graphics/WU_logo.png
+        footer: "[Data-based Storytelling](https://danielw2904.github.io/data-based-storytelling/)"
+        height: 1080
+        width: 1920
+        center-title-slide: false
+        center: false
+        progress: false
+        embed-resources: true # slower compile -> activate later
+        code-link: true
+        code-overflow: wrap
+        incremental: false
+        echo: true
+        code-fold: true
+        fig-align: center
+        fig-width: 18
+        fig-height: 8
+---
+
+# HI
