@@ -89,21 +89,37 @@ format:
 
 ## Results I
 
-<<<<<<< HEAD
-=======
+
 ::: {#fig-div}
 
-![](./Graphics/mod26_3D_4S_plot1.pdf)
+![Plot1](./Graphics/mod26_3D_4S_plot1-1.png)
 
 :::
 
->>>>>>> 6842aeae2854c9fd46bb45526aa454598192a5e4
+
 ## Results II
+
+::: {#fig-div}
+
+![Plot2](./Graphics/mod26_3D_4S_plot2-1.png)
+
+:::
 
 ## Results III
 
+::: {#fig-div}
+
+![Plot3](./Graphics/mod26_3D_4S_plot3-1.png)
+
+:::
+
 ## Results IV
 
+::: {#fig-div}
+
+![Plot4](./Graphics/mod26_3D_4S_plot4-1.png)
+
+:::
 
 ## Conclusion
 
