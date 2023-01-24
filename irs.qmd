@@ -115,11 +115,8 @@ format:
 
 ## Data II
 
-::: {#fig-div}
 
-![''](screenshot.png){.r-stretch}
-
-::: 
+![ ](screenshot.png){.r-stretch}
 
 ## Data III
 
@@ -403,6 +400,16 @@ $$
 
 ## Conclusion
 
+- Modelling requirements:
+  - Time-varying covariates with time-varying coefficients
+- Preliminary findings:
+  - More eloquent leads us to believe that the customer is **not** about to churn
+  - However, longer feedback has the opposite effect
+
 ## Discussion
+
+- Should a latent factor be incorporated into the model?
+- Identification of causal relationships?
+- Focus on prediction vs. explanation?
 
 ## References
