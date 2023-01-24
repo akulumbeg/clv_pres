@@ -33,15 +33,16 @@ format:
 
 ## Story
 
-- Contractual setting - curated shopping
+- **Subscription businesses** are very popular [@mccarthy2017subscription]
+- Contractual setting - **curated shopping**
 - Nation-wide apparel subscription box service provider
 - Female customers only
 
 <br>
 
-- Monthly surprise boxes with clothes selected by a stylist (person)
+- **Monthly** surprise boxes with clothes selected by a stylist (person)
 - Option for customer to approve or change something in the box
-- Once received - rating of each item by categories and with optional written feedback
+- Once received - **rating of each item** by categories and with optional **written feedback**
 
 
 ## Story II
@@ -49,14 +50,17 @@ format:
 ![](./Graphics/story.png)
 
 
-## Idea
+## Ideas
 
-- Propensity to churn changes over time
-- Traditionally data is 
-    - hard to obtain
+- Propensity to churn **changes over time** [@fader_how_2018-1]
+- Traditionally data for analysis is  
+    - hard to obtain [@schweidel_understanding_2008]
     - static / collected once
-- Written feedback contains (un)conscious pieces of information
-- Feedback changes over time
+    
+<br>
+    
+- Written **feedback contains (un)conscious pieces of information** [@netzer_when_2019; @naumzik_i_2022]
+- Feedback changes over time [@umashankar2022express]
     - Stylist did a better/worse job than before
     - Clothes' color/fit/cut/size/material is good/bad
     - Items did/didn't adhere to the customer preferences stated in the quiz
@@ -64,9 +68,15 @@ format:
     
 ## Problem
 
-- What is hiding in the dynamic feedback (e.g., emotionality, eloquence, engagement...)?
-- How do these components influence the risk of customer attrition?
-- Can we identify other (latent) time-varying signals that affect customer lifetime?
+- What is **hiding** in the dynamic feedback (e.g., emotionality, eloquence, engagement...)?
+
+<br>
+
+- How do these components influence the **risk of customer attrition**?
+
+<br>
+
+- Can we identify other **(latent) time-varying signals** that **affect customer lifetime**?
 
 
 ## Data
@@ -102,6 +112,23 @@ format:
 :::
 
 ::::
+
+## Data II
+
+
+
+## Data III
+
+<table style="text-align:center"><tr><td colspan="6" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
+<tr><td colspan="6" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Customer Age</td><td>55,046</td><td>37.561</td><td>8.279</td><td>18</td><td>98</td></tr>
+<tr><td style="text-align:left">Customer Lifetime Spending</td><td>55,046</td><td>1,091.788</td><td>1,232.202</td><td>0.000</td><td>15,054.740</td></tr>
+<tr><td style="text-align:left">Contract Length (Days)</td><td>55,046</td><td>326.063</td><td>198.436</td><td>28</td><td>882</td></tr>
+<tr><td style="text-align:left">Contract Length (Months)</td><td>55,046</td><td>10.242</td><td>6.521</td><td>1</td><td>29</td></tr>
+<tr><td style="text-align:left">Feedback Word Count Per Box (Sum)</td><td>55,046</td><td>46.186</td><td>79.167</td><td>0</td><td>2,536</td></tr>
+<tr><td style="text-align:left">Feedback Sentiment Per Box (Mean) </td><td>55,046</td><td>0.013</td><td>0.100</td><td>-1.414</td><td>1.080</td></tr>
+<tr><td style="text-align:left">Feedback Eloquence Per Box (Mean)</td><td>55,046</td><td>0.080</td><td>0.095</td><td>0.000</td><td>1.000</td></tr>
+<tr><td colspan="6" style="border-bottom: 1px solid black"></td></tr></table>
+
 
 # Model
 
